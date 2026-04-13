@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Social Media Content Planner - Plan and organize your upcoming content simply." />
+  <title>Social Media Content Planner</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- ===== Header ===== -->
+    <header class="app-header">
+      <h1>Content Planner</h1>
+      <p>Plan and organize your upcoming social media content.</p>
+      <div class="summary-chips">
+        <div class="chip" id="chip-total">Total: <span>0</span></div>
+        <div class="chip" id="chip-idea">Idea: <span>0</span></div>
+        <div class="chip" id="chip-draft">Draft: <span>0</span></div>
+        <div class="chip" id="chip-scheduled">Scheduled: <span>0</span></div>
+        <div class="chip" id="chip-published">Published: <span>0</span></div>
+      </div>
+    </header>
+
+    <!-- ===== Add Content Plan ===== -->
+    <section class="app-section">
+      <div class="section-header">
+        <i data-lucide="plus-circle"></i>
+        <h3>Add Content Plan</h3>
+      </div>
+      <form id="plan-form" class="simple-form glass">
+        <div class="form-group">
+          <label for="plan-title">Content Title</label>
+          <input type="text" id="plan-title" placeholder="What content are you planning?" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="plan-platform">Platform</label>
+            <select id="plan-platform">
+              <option>Instagram</option>
+              <option>Facebook</option>
+              <option>LinkedIn</option>
+              <option>X</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="plan-status">Status</label>
+            <select id="plan-status">
+              <option>Idea</option>
+              <option>Draft</option>
+              <option>Scheduled</option>
+              <option>Published</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="plan-notes">Notes / Caption Idea <span class="label-optional">(optional)</span></label>
+          <textarea id="plan-notes" rows="2" placeholder="Any caption ideas or notes for this content..."></textarea>
+        </div>
+
+        <div class="form-row align-end">
+          <div class="form-group">
+            <label for="plan-date">Planned Date</label>
+            <input type="date" id="plan-date" required />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submit-plan-btn">Add Plan</button>
+            <button type="button" class="btn btn-secondary hidden" id="cancel-edit-btn">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== Filter Plans ===== -->
+    <section class="app-section">
+      <div class="section-header">
+        <i data-lucide="sliders"></i>
+        <h3>Filter Plans</h3>
+      </div>
+      <div class="filter-section glass">
+        <div class="filter-group">
+          <label>Search Plans</label>
+          <div class="search-input-wrapper">
+            <i data-lucide="search"></i>
+            <input type="text" id="plan-search" placeholder="Find planned content by keyword..." />
+          </div>
+        </div>
+
+        <div class="filter-grid">
+          <div class="filter-group">
+            <label>Filter by Platform</label>
+            <select id="platform-filter">
+              <option value="all">All Platforms</option>
+              <option>Instagram</option>
+              <option>Facebook</option>
+              <option>LinkedIn</option>
+              <option>X</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Filter by Status</label>
+            <select id="status-filter">
+              <option value="all">All Statuses</option>
+              <option>Idea</option>
+              <option>Draft</option>
+              <option>Scheduled</option>
+              <option>Published</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Sort by Date</label>
+            <select id="sort-filter">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="clear-filters" class="btn btn-secondary">
+          <i data-lucide="rotate-ccw"></i> Clear All
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== Planned Content ===== -->
+    <section class="app-section">
+      <div class="list-header">
+        <div class="section-header">
+          <i data-lucide="layout-list"></i>
+          <h3>Planned Content</h3>
+        </div>
+        <span id="results-count" class="results-badge">0 plans</span>
+      </div>
+
+      <div id="plans-container"></div>
+
+      <div id="empty-state" class="hidden">
+        <i data-lucide="calendar-x"></i>
+        <p>No content plans yet.<br />Start by adding your first content plan above.</p>
+      </div>
+    </section>
+
+  </div><!-- /container -->
+
+  <!-- Toast Notifications -->
+  <div id="notification-container"></div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="confirm-modal" class="modal-overlay hidden">
+    <div class="modal-content glass">
+      <div class="modal-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ef4444"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+          <path d="M12 9v4" />
+          <path d="M12 17h.01" />
+        </svg>
+      </div>
+      <h3>Delete Content Plan?</h3>
+      <p>This action cannot be undone. The plan will be permanently removed.</p>
+      <div class="modal-actions">
+        <button id="confirm-cancel" class="btn btn-secondary">No, Keep it</button>
+        <button id="confirm-delete" class="btn btn-danger">Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SplashScreen component must load before app.js -->
+  <script src="SplashScreen.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+
+</html>
