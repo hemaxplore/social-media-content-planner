@@ -1,7 +1,7 @@
 # 📅 Social Media Content Planner
 
 <p align="center">
-  <img src=   "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZHAzanZuMWoxcXB4dHE0dGF5eGQzbHkxMWlsbmhkaTkzeDhqcHYwayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/azjux6zMBW3cWxK21P/giphy.gif/" width="70%"  alt="Planner Banner"/>
+  <img src=  "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjZ5MGw0cWxwcGhub3F3aDd0MHByZXNkbnZpdXV5M2Y4d2xndGZicCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/atZII8NmbPGw0/200.webp" width="70%"  alt="Planner Banner"/>
 </p>
 
 <p align="center">
