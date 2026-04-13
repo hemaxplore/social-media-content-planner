@@ -30,7 +30,7 @@
   </a>
 </p>
 
-> 🌐 **URL:** [Your Hosted URL Here]
+> 🌐 **URL:** 👉 (https://hemaxplore.github.io/social-media-content-planner/)]
 
 ---
 
